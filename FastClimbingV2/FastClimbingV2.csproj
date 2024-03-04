@@ -5,7 +5,7 @@
         <AssemblyName>FastClimbing</AssemblyName>
         <Product>FastClimbingV2</Product>
         <!-- Change to whatever version you're currently on. -->
-        <Version>1.0.1</Version>
+        <Version>1.1.1</Version>
     </PropertyGroup>
 
     <!-- Project Properties -->
@@ -53,8 +53,11 @@
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
     </ItemGroup>
 
-    <!-- Secondary Package References - Libraries and APIs -->
     <ItemGroup>
-        <PackageReference Include="Owen3H.BepInEx.CSync" Version="2.1.0" PrivateAssets="all" />
+      <Reference Include="com.sigurd.csync">
+        <HintPath>C:\Users\inoyu\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\tests\BepInEx\plugins\Sigurd-CSync\CSync\com.sigurd.csync.dll</HintPath>
+      </Reference>
     </ItemGroup>
+
+    <!-- Secondary Package References - Libraries and APIs -->
 </Project>

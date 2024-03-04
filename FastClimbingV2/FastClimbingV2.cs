@@ -6,7 +6,6 @@ using HarmonyLib;
 namespace FastClimbingV2
 {
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-    [BepInDependency("io.github.CSync", BepInDependency.DependencyFlags.HardDependency)]
     public class FastClimbingV2 : BaseUnityPlugin
     {
         internal static FastClimbingConfigs mySyncedConfigs;
