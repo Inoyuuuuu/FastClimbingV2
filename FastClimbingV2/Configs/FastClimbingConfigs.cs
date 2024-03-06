@@ -1,30 +1,26 @@
 ﻿using BepInEx.Configuration;
-using CSync;
-using CSync.Lib;
-using CSync.Util;
+using GameNetcodeStuff;
+using HarmonyLib;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
+using Unity.Collections;
+using Unity.Netcode;
 
 namespace FastClimbingV2.Configs
 {
-    [DataContract]
-    internal class FastClimbingConfigs : SyncedConfig<FastClimbingConfigs>
+    [Serializable]
+    public static class FastClimbingConfigs
     {
-        [DataMember] public SyncedEntry<float> CLIMB_SPEED_MULTIPLIER { get; private set; }
+        public static ConfigEntry<float> CLIMB_SPEED_MULTIPLIER;
+
         private const float sprintClimbSpeedMultiplierBaseValue = 1.8f;
-
-        public FastClimbingConfigs(ConfigFile cfg) : base(MyPluginInfo.PLUGIN_NAME)
+        public static void BindConfigs(ConfigFile cfg)
         {
-            ConfigManager.Register(this);
-
-            CLIMB_SPEED_MULTIPLIER = cfg.BindSyncedEntry("SprintClimbing", "sprintClimbingSpeed", sprintClimbSpeedMultiplierBaseValue, "A multiplier for the climbing speed while sprinting!");
-            
+            CLIMB_SPEED_MULTIPLIER = cfg.Bind("SprintClimbing", "sprintClimbingSpeed", sprintClimbSpeedMultiplierBaseValue, "A multiplier for the climbing speed while sprinting!");
             fixClimbspeed();
         }
 
-        private void fixClimbspeed()
+        private static void fixClimbspeed()
         {
             if (CLIMB_SPEED_MULTIPLIER.Value > 50.0f)
             {

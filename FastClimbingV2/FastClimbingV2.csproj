@@ -53,11 +53,5 @@
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="com.sigurd.csync">
-        <HintPath>C:\Users\inoyu\AppData\Roaming\r2modmanPlus-local\LethalCompany\profiles\tests\BepInEx\plugins\Sigurd-CSync\CSync\com.sigurd.csync.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
     <!-- Secondary Package References - Libraries and APIs -->
 </Project>

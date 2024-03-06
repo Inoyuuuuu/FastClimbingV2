@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using FastClimbingV2.Configs;
+using FastClimbingV2.Patches;
 using HarmonyLib;
 
 namespace FastClimbingV2
@@ -8,16 +9,15 @@ namespace FastClimbingV2
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
     public class FastClimbingV2 : BaseUnityPlugin
     {
-        internal static FastClimbingConfigs mySyncedConfigs;
         public static FastClimbingV2 Instance { get; private set; } = null!;
         internal new static ManualLogSource Logger { get; private set; } = null!;
         internal static Harmony? Harmony { get; set; }
 
         private void Awake()
         {
-            mySyncedConfigs = new FastClimbingConfigs(Config);
             Logger = base.Logger;
             Instance = this;
+            FastClimbingConfigs.BindConfigs(((BaseUnityPlugin)FastClimbingV2.Instance).Config);
 
             Patch();
 
