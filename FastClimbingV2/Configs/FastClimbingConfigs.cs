@@ -13,7 +13,7 @@ namespace FastClimbingV2.Configs
     {
         public static ConfigEntry<float> CLIMB_SPEED_MULTIPLIER;
 
-        private const float sprintClimbSpeedMultiplierBaseValue = 1.8f;
+        private const float sprintClimbSpeedMultiplierBaseValue = 1.85f;
         public static void BindConfigs(ConfigFile cfg)
         {
             CLIMB_SPEED_MULTIPLIER = cfg.Bind("SprintClimbing", "sprintClimbingSpeed", sprintClimbSpeedMultiplierBaseValue, "A multiplier for the climbing speed while sprinting!");

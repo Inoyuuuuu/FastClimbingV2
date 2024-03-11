@@ -23,8 +23,6 @@ namespace FastClimbingV2.Patches
 
             if (__instance.isPlayerControlled && __instance.isClimbingLadder && __instance.isSprinting)
             {
-                FastClimbingV2.Logger.LogInfo(ConfigSync.Instance.climbSpeedMultiplier);
-
                 if (__instance.sprintMeter > 0.3f)
                 {
                     __instance.climbSpeed = normalClimbSpeedValue * ConfigSync.Instance.climbSpeedMultiplier;
@@ -38,11 +36,6 @@ namespace FastClimbingV2.Patches
             else
             {
                 __instance.climbSpeed = normalClimbSpeedValue;
-            }
-
-            if (__instance.isSprinting)
-            {
-                FastClimbingV2.Logger.LogInfo(ConfigSync.Instance.climbSpeedMultiplier);
             }
         }
     }
