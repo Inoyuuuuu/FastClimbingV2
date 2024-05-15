@@ -1,8 +1,10 @@
 ﻿using BepInEx;
+using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using FastClimbingV2.Configs;
 using FastClimbingV2.Patches;
 using HarmonyLib;
+using System.Collections.Generic;
 
 namespace FastClimbingV2
 {
@@ -12,6 +14,10 @@ namespace FastClimbingV2
         public static FastClimbingV2 Instance { get; private set; } = null!;
         internal new static ManualLogSource Logger { get; private set; } = null!;
         internal static Harmony? Harmony { get; set; }
+
+        internal static string giantExtLaddersGUID = "GiantExtensionLadders";
+
+        internal static bool isGiantExtLaddersActive = false;
 
         private void Awake()
         {
@@ -34,5 +40,7 @@ namespace FastClimbingV2
 
             Logger.LogDebug("Finished patching!");
         }
+
+        
     }
 }

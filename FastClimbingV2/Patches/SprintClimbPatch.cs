@@ -1,6 +1,7 @@
 using FastClimbingV2.Configs;
 using GameNetcodeStuff;
 using HarmonyLib;
+using Unity.Burst.CompilerServices;
 
 namespace FastClimbingV2.Patches
 {
@@ -9,34 +10,44 @@ namespace FastClimbingV2.Patches
     {
         private static float normalClimbSpeedValue;
         private static bool isNormalClimbSpeedValueSet = false;
+        private static bool isTinyLadderClimbingSpeed = false;
 
         [HarmonyPatch("Update")]
         [HarmonyPriority(Priority.VeryLow)]
         [HarmonyPostfix]
         static void crankThatClimbingSpeed(PlayerControllerB __instance)
         {
-            if (!isNormalClimbSpeedValueSet)
+            if (FastClimbingV2.isGiantExtLaddersActive)
             {
-                normalClimbSpeedValue = __instance.climbSpeed;
-                isNormalClimbSpeedValueSet = true;
+                isTinyLadderClimbingSpeed = GiantExtensionLaddersV2.GiantExtensionLaddersV2.isPlayerOnTinyLadder;
             }
 
-            if (__instance.isPlayerControlled && __instance.isClimbingLadder && __instance.isSprinting)
+            if (!isTinyLadderClimbingSpeed)
             {
-                if (__instance.sprintMeter > 0.3f)
+                if (!isNormalClimbSpeedValueSet)
                 {
-                    __instance.climbSpeed = normalClimbSpeedValue * ConfigSync.Instance.climbSpeedMultiplier;
+                    normalClimbSpeedValue = __instance.climbSpeed;
+                    isNormalClimbSpeedValueSet = true;
                 }
-                else
+
+                if (__instance.isPlayerControlled && __instance.isClimbingLadder)
                 {
                     __instance.climbSpeed = normalClimbSpeedValue;
-                    __instance.isExhausted = true;
+
+                    if (__instance.isSprinting)
+                    {
+                        if (__instance.sprintMeter > 0.3f)
+                        {
+                            __instance.climbSpeed = normalClimbSpeedValue * ConfigSync.Instance.climbSpeedMultiplier;
+                        }
+                        else
+                        {
+                            __instance.isExhausted = true;
+                        }
+                    }
                 }
             }
-            else
-            {
-                __instance.climbSpeed = normalClimbSpeedValue;
-            }
+            
         }
     }
 }

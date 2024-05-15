@@ -38,6 +38,7 @@
         viewing Private Information in stack traces.
         -->
         <PathMap>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))=./</PathMap>
+        <UserSecretsId>63aa1b45-3751-4aa5-a04f-bc6fef4502f6</UserSecretsId>
     </PropertyGroup>
 
     <!-- Primary Package References -->
@@ -51,6 +52,12 @@
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="GiantExtensionLadders">
+        <HintPath>..\..\..\lcMod_GiantExtensionLaddersV2\GiantExtensionLaddersV2\GiantExtensionLaddersV2\bin\Debug\netstandard2.1\GiantExtensionLadders.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
     <!-- Secondary Package References - Libraries and APIs -->
