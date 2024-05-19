@@ -15,9 +15,9 @@ namespace FastClimbingV2
         internal new static ManualLogSource Logger { get; private set; } = null!;
         internal static Harmony? Harmony { get; set; }
 
-        internal static string giantExtLaddersGUID = "GiantExtensionLadders";
+        internal static string TINY_LADDER_PREFIX = "tinyLadder";
 
-        internal static bool isGiantExtLaddersActive = false;
+        internal static bool isOnTinyLadder = false;
 
         private void Awake()
         {

@@ -6,30 +6,29 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace FastClimbingV2.Patches
 {
-    [HarmonyPatch(typeof(PlayerControllerB))]
+    [HarmonyPatch(typeof(InteractTrigger))]
     internal class CheckForOtherModsPatch
     {
-        [HarmonyPatch("ConnectClientToPlayerObject")]
-        [HarmonyPostfix]
-        static void CheckForGiantExtLaddersPatch()
+        [HarmonyPrefix]
+        [HarmonyPriority(Priority.High)]
+        [HarmonyPatch("ladderClimbAnimation")]
+        static void CheckForGiantExtLaddersPatch(InteractTrigger __instance, ref PlayerControllerB playerController)
         {
-            Dictionary<string, PluginInfo> pluginInfos = Chainloader.PluginInfos;
-
-            foreach (PluginInfo value in pluginInfos.Values)
+            if (__instance.transform.parent != null
+                && __instance.transform.parent.transform.parent != null
+                && __instance.transform.parent.transform.parent.transform.parent != null 
+                && __instance.transform.parent.transform.parent.transform.parent.name.StartsWith(FastClimbingV2.TINY_LADDER_PREFIX))
             {
-                if (value.Metadata.GUID.Equals(FastClimbingV2.giantExtLaddersGUID))
-                {
-                    FastClimbingV2.Logger.LogMessage("GiantExtensionLadders is installed!");
-
-                    FastClimbingV2.isGiantExtLaddersActive = true;
-                    return;
-                }
+                FastClimbingV2.Logger.LogDebug("player started climbing this ladder: " + __instance.transform.parent.transform.parent.transform.parent.name);
+                FastClimbingV2.isOnTinyLadder = true;
+            } else
+            {
+                FastClimbingV2.isOnTinyLadder = false;
             }
-
-            FastClimbingV2.isGiantExtLaddersActive = false;
         }
     }
 }
