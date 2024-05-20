@@ -23,7 +23,6 @@ namespace FastClimbingV2.Patches
                 && __instance.transform.parent.transform.parent.transform.parent != null 
                 && __instance.transform.parent.transform.parent.transform.parent.name.StartsWith(FastClimbingV2.TINY_LADDER_PREFIX))
             {
-                FastClimbingV2.Logger.LogDebug("player started climbing this ladder: " + __instance.transform.parent.transform.parent.transform.parent.name);
                 FastClimbingV2.isOnTinyLadder = true;
             } else
             {

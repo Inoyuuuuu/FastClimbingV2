@@ -13,24 +13,27 @@ namespace FastClimbingV2.Configs
     {
         public static ConfigEntry<float> CLIMB_SPEED_MULTIPLIER;
 
-        private const float sprintClimbSpeedMultiplierBaseValue = 1.85f;
+        private const float BASE_SPRINT_SPEED_MULTIPLIER = 1.85f;
+        private const float MAX_SPRINT_SPEED_MULTIPLIER = 80f;
+        private const float MIN_SPRINT_SPEED_MULTIPLIER = 1f;
+
         public static void BindConfigs(ConfigFile cfg)
         {
-            CLIMB_SPEED_MULTIPLIER = cfg.Bind("SprintClimbing", "sprintClimbingSpeed", sprintClimbSpeedMultiplierBaseValue, "A multiplier for the climbing speed while sprinting!");
+            CLIMB_SPEED_MULTIPLIER = cfg.Bind("SprintClimbing", "sprintClimbingSpeed", BASE_SPRINT_SPEED_MULTIPLIER, "A multiplier for the climbing speed while sprinting!");
             fixClimbspeed();
         }
 
         private static void fixClimbspeed()
         {
-            if (CLIMB_SPEED_MULTIPLIER.Value > 50.0f)
+            if (CLIMB_SPEED_MULTIPLIER.Value > MAX_SPRINT_SPEED_MULTIPLIER)
             {
-                CLIMB_SPEED_MULTIPLIER.Value = 50.0f;
-                FastClimbingV2.Logger.LogInfo("climbing speed value too high, was set to 50.");
+                CLIMB_SPEED_MULTIPLIER.Value = MAX_SPRINT_SPEED_MULTIPLIER;
+                FastClimbingV2.Logger.LogInfo("climbing speed value too high, was set to " + MAX_SPRINT_SPEED_MULTIPLIER + ".");
             }
-            if (CLIMB_SPEED_MULTIPLIER.Value < 1.0f)
+            if (CLIMB_SPEED_MULTIPLIER.Value < MIN_SPRINT_SPEED_MULTIPLIER)
             {
-                CLIMB_SPEED_MULTIPLIER.Value = 1.0f;
-                FastClimbingV2.Logger.LogInfo("climbing speed value too low, was set to 1.");
+                CLIMB_SPEED_MULTIPLIER.Value = MIN_SPRINT_SPEED_MULTIPLIER;
+                FastClimbingV2.Logger.LogInfo("climbing speed value too low, was set to " + MIN_SPRINT_SPEED_MULTIPLIER + ".");
             }
         }
     }

@@ -9,6 +9,8 @@ using Unity.Collections;
 namespace FastClimbingV2.Configs
 {
 
+    //This method of config syncing was copied with permission from FlipMod's "BetterStamina" mod.
+
     [Serializable]
     [HarmonyPatch]
     public class ConfigSync
