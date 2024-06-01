@@ -1,6 +1,6 @@
 # Fast Climbing
 
-**A small mod for lethal company, that allows players to sprint while climbing ladders.**
+**A small mod for the game lethal company, that allows players to sprint while climbing ladders.**
 
 ## Features
 > keep in mind, that everyone has the same climbing sprint-speed as the host
